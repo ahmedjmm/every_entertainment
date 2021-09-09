@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/move"
+        android:title="@string/move_to" />
+
+    <item
+        android:id="@+id/copy"
+        android:title="@string/copy_to" />
+
+    <item
+        android:id="@+id/delete"
+        android:title="@string/delete"/>
+
+    <item
+        android:id="@+id/rename"
+        android:title="@string/rename"/>
+
+    <item
+        android:id="@+id/hide"
+        android:title="@string/hide"/>
+
+    <item
+        android:id="@+id/select_all"
+        android:title="@string/select_all"/>
+
+    <item
+        android:id="@+id/dismiss"
+        android:title="@string/dismiss"/>
+
+    <item
+        android:id="@+id/create_folder"
+        android:title="@string/create_folder"/>
+
+    <item
+        android:id="@+id/share"
+        android:title="@string/share"/>
+
+    <item
+        android:id="@+id/info"
+        android:title="@string/info"/>
+</menu>

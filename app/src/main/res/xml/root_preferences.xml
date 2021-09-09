@@ -1,0 +1,47 @@
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory app:title="@string/files_settings_header">
+        <SwitchPreferenceCompat
+            app:key="hidden"
+            app:title="@string/show_hidden_title"
+            app:summaryOn="@string/show_hidden_on"
+            app:summaryOff="@string/show_hidden_off"/>
+    </PreferenceCategory>
+
+    <PreferenceCategory app:title="@string/general_settings_header">
+        <ListPreference
+            app:dialogTitle="@string/languages_dialog_title"
+            app:defaultValue="en"
+            app:entries="@array/languages_entries"
+            app:entryValues="@array/languages_values"
+            app:key="language"
+            app:title="@string/app_language"
+            app:useSimpleSummaryProvider="true" />
+    </PreferenceCategory>
+
+    <PreferenceCategory>
+        <Preference
+            android:selectable="false"
+            android:summary="@string/restart_after_change_setting" />
+    </PreferenceCategory>
+
+    <PreferenceCategory app:title="@string/about">
+        <Preference
+            android:selectable="false"
+            android:summary="@string/version_name" />
+
+        <Preference
+            app:title="@string/rate"
+            android:summary="@string/rate_summery" />
+
+        <Preference
+            app:title="@string/bug_report"
+            app:key="feedback"
+            android:summary="@string/bug_report_summery" />
+    </PreferenceCategory>
+
+
+
+
+</PreferenceScreen>

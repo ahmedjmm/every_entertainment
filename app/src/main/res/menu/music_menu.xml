@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:title="@string/app_menu_sort">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/sort_song_a_to_z"
+                    android:title="@string/sort_A_to_z"/>
+
+                <item
+                    android:id="@+id/sort_album_a_to_z"
+                    android:title="@string/sort_album_a_to_z"/>
+
+                <item
+                    android:id="@+id/sort_artist_a_to_z"
+                    android:title="@string/sort_artist_a_to_z"/>
+
+                <item
+                    android:id="@+id/sort_count_small_to_large"
+                    android:title="@string/sort_count_short_to_long"/>
+
+                <item
+                    android:id="@+id/sort_duration_short_to_long"
+                    android:title="@string/sort_duration_short_to_long"/>
+            </group>
+
+            <item
+                android:id="@+id/reverse_sort"
+                android:title="@string/reverse_sort"
+                android:checkable="true"/>
+        </menu>
+    </item>
+
+    <item
+        android:id="@+id/settings"
+        android:title="@string/app_menu_settings"/>
+</menu>
