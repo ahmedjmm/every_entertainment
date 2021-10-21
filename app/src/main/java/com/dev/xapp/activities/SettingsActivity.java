@@ -7,6 +7,7 @@ import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Build;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.preference.Preference;
@@ -14,9 +15,15 @@ import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceManager;
 
 import com.dev.xapp.R;
+import com.google.android.play.core.review.ReviewInfo;
+import com.google.android.play.core.review.ReviewManager;
+import com.google.android.play.core.review.ReviewManagerFactory;
+import com.google.android.play.core.review.model.ReviewErrorCode;
+import com.google.android.play.core.tasks.Task;
 
 import java.util.Locale;
 import java.util.Objects;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class SettingsActivity extends AppCompatActivity {
 
@@ -62,8 +69,34 @@ public class SettingsActivity extends AppCompatActivity {
         public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
             setPreferencesFromResource(R.xml.root_preferences, rootKey);
             getPreferenceScreen().getSharedPreferences().registerOnSharedPreferenceChangeListener(this);
-            Preference preference = findPreference("feedback");
-            Objects.requireNonNull(preference).setOnPreferenceClickListener(preference1 -> {
+
+            Preference rateUsPreference = findPreference("rate_us");
+            Objects.requireNonNull(rateUsPreference).setOnPreferenceClickListener(preference -> {
+                ReviewManager manager = ReviewManagerFactory.create(requireContext());
+                Task<ReviewInfo> request = manager.requestReviewFlow();
+                request.addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        // We can get the ReviewInfo object
+                        ReviewInfo reviewInfo = task.getResult();
+                        Toast.makeText(getContext(), "1", Toast.LENGTH_SHORT).show();
+                        Task<Void> flow = manager.launchReviewFlow(requireActivity(), reviewInfo);
+                        flow.addOnCompleteListener(task2 -> {
+                            Toast.makeText(getContext(), "2", Toast.LENGTH_SHORT).show();
+                            // The flow has finished. The API does not indicate whether the user
+                            // reviewed or not, or even whether the review dialog was shown. Thus, no
+                            // matter the result, we continue our app flow.
+                        });
+                    } else {
+                        // There was some problem, log or handle the error code.
+//                        @ReviewErrorCode int reviewErrorCode = ((TaskException) task.getException()).getErrorCode();
+                    }
+                });
+
+                return true;
+            });
+
+            Preference reportBugPreference = findPreference("report_bug");
+            Objects.requireNonNull(reportBugPreference).setOnPreferenceClickListener(preference1 -> {
                 String body = null;
                 try {
                     body = requireContext().getPackageManager().getPackageInfo(requireContext().getPackageName(), 0).versionName;

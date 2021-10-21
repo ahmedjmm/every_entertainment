@@ -50,18 +50,15 @@ public class MemoryListViewAdapter extends ArrayAdapter<Folders> implements Popu
     private final Context context;
     public static List<Folders> list;
     List<Folders> cancelSearchList;
-    private int selectedPosition;
-
     ViewHolder viewHolder;
-
-    ListFilter listFilter;
+    private int selectedPosition;
 
     public MemoryListViewAdapter(Context context, List<Folders> list) {
         super(context, 0, list);
         this.context = context;
         MemoryListViewAdapter.list = list;
         cancelSearchList = list;
-        checkStates = new SparseBooleanArray(list.size());
+        checkStates = new SparseBooleanArray(cancelSearchList.size());
     }
 
     public static void selectAll() {
@@ -82,12 +79,12 @@ public class MemoryListViewAdapter extends ArrayAdapter<Folders> implements Popu
 
     @Override
     public int getCount() {
-        return list.size();
+        return cancelSearchList.size();
     }
 
     @Override
     public Folders getItem(int position) {
-        return list.get(position);
+        return cancelSearchList.get(position);
     }
 
     @Override
@@ -107,7 +104,7 @@ public class MemoryListViewAdapter extends ArrayAdapter<Folders> implements Popu
         else
             viewHolder = (ViewHolder) convertView.getTag();
 
-        final Folders folders = list.get(position);
+        final Folders folders = cancelSearchList.get(position);
         viewHolder.folderIcon.setImageResource(folders.getFolderIcon());
         viewHolder.fileNameTextView.setText(folders.getFile().getName());
         viewHolder.subFoldersNumberTextView.setText(folders.getSubFoldersQuantity(context, folders.getFile()));
@@ -382,9 +379,7 @@ public class MemoryListViewAdapter extends ArrayAdapter<Folders> implements Popu
     @NonNull
     @Override
     public Filter getFilter() {
-        if (listFilter == null)
-            listFilter = new ListFilter();
-        return listFilter;
+        return new ListFilter();
     }
 
     private class ListFilter extends Filter {
@@ -422,7 +417,7 @@ public class MemoryListViewAdapter extends ArrayAdapter<Folders> implements Popu
 
         @Override
         protected void publishResults(CharSequence constraint, FilterResults results) {
-            list = (List<Folders>) results.values;
+            cancelSearchList = (List<Folders>) results.values;
             MemoryFragment.foldersList = list;
             notifyDataSetChanged();
         }

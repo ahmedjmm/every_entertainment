@@ -126,7 +126,7 @@ public class SDCardFragment extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
         try {
             File[] sdRootFolders = sdCardRoot.listFiles();
-//            assert sdRootFolders != null;
+            assert sdRootFolders != null;
             for (File sdRootFolder: sdRootFolders) {
                 if (!sdRootFolder.getName().equals("emulated") && !sdRootFolder.getName().equals("self")) {
                     currentFolder = sdRootFolder;
@@ -190,8 +190,8 @@ public class SDCardFragment extends Fragment {
                     }
             }
             catch (NullPointerException ignored){ }
-            String sort1 = sharedPreferences.getString("memory_sort", "a to z");
-            boolean isReverse1 = sharedPreferences.getBoolean("memory_sort_isReverse", false);
+            String sort1 = sharedPreferences.getString("card_sort", "a to z");
+            boolean isReverse1 = sharedPreferences.getBoolean("card_sort_isReverse", false);
             Folders.sort(sort1, isReverse1, foldersList, sdCardListViewAdapter);
             swipeRefreshLayout.setRefreshing(false);
         });

@@ -5,16 +5,19 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import com.dev.xapp.Adapters.SDCardListViewAdapter;
 import com.dev.xapp.R;
 import com.google.android.material.tabs.TabLayout;
 
@@ -77,7 +80,12 @@ public class StorageFragment extends Fragment {
 
         @Override
         public int getCount() {
-            return 2;
+            /* initializing only internal memory fragment (tab) to avoid split screen errors
+            in SDCardListViewAdapter if no sd card inserted. */
+            if(ContextCompat.getExternalFilesDirs(context, null).length == 2)
+                return 2;
+            else
+                return 1;
         }
 
         @Override

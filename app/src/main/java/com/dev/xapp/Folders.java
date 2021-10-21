@@ -425,20 +425,20 @@ public class Folders extends FileUtils {
             memoryListViewAdapter.clear();
             File[] files = folder.listFiles();
             if(showHidden)
-                for (File value : files)
-                    if (value.isDirectory())
-                        memoryListViewAdapter.add(new Folders(R.drawable.ic_folders, value, getFolderSize(value)));
+                for (File file : files)
+                    if (file.isDirectory())
+                        memoryListViewAdapter.add(new Folders(R.drawable.ic_folders, file, getFolderSize(file)));
                     else
-                        memoryListViewAdapter.add(new Folders(R.drawable.ic_file, value, getFolderSize(value)));
+                        memoryListViewAdapter.add(new Folders(R.drawable.ic_file, file, getFolderSize(file)));
             else
-                for (File value : files)
-                    if (value.getName().startsWith("."))
+                for (File file : files)
+                    if (file.getName().startsWith("."))
                         continue;
                     else
-                    if (value.isDirectory())
-                        memoryListViewAdapter.add(new Folders(R.drawable.ic_folders, value, getFolderSize(value)));
+                    if (file.isDirectory())
+                        memoryListViewAdapter.add(new Folders(R.drawable.ic_folders, file, getFolderSize(file)));
                     else
-                        memoryListViewAdapter.add(new Folders(R.drawable.ic_file, value, getFolderSize(value)));
+                        memoryListViewAdapter.add(new Folders(R.drawable.ic_file, file, getFolderSize(file)));
             memoryListViewAdapter.notifyDataSetChanged();
             MemoryFragment.currentFolder = folder;
             namesList.subList(position + 1, namesList.size()).clear();

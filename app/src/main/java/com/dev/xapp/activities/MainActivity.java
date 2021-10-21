@@ -37,6 +37,10 @@ public class MainActivity extends AppCompatActivity {
         checkLanguage();
         setContentView(R.layout.activity_main);
 
+        //check count of storage devices to avoid split screen errors in SDCardListViewAdapter if no sd card inserted.
+        if(ContextCompat.getExternalFilesDirs(this, null).length == 1)
+            Toast.makeText(this,R.string.no_sd_card, Toast.LENGTH_LONG).show();
+
         checkPermissions();
 
         bottomNavigationView = findViewById(R.id.bottom_navigation);

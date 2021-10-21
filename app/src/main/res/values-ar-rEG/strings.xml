@@ -77,11 +77,12 @@
     <string name="show_hidden_title">اظهار الملفات و المجلدات المخفية</string>
     <string name="app_language">اللغة</string>
     <string name="restart_after_change_setting">برجاء العلم بأن التطبيق سيعيد تشغيل نفسه بعد تغير الاعدادات</string>
-    <string name="version_name">اصدار: 1.0</string>
+    <string name="version_name">اصدار: 1.7</string>
     <string name="rate">قيمنا</string>
     <string name="rate_summery">تقيمك و مراجعتك تساعدنا بشكل افضل</string>
     <string name="bug_report">تبليغ عن خطأ</string>
     <string name="about">حول</string>
     <string name="bug_report_summery">سيتم تضمين بعض المعلومات عن الجهاز في التقرير للمساعدة في اصلاح الاخطاء</string>
     <string name="no_contents">عذرا ، لا يوجد محتوى</string>
+    <string name="no_sd_card">لا يوجد ذاكرة خارجية</string>
 </resources>

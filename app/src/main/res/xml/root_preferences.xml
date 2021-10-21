@@ -28,20 +28,18 @@
 
     <PreferenceCategory app:title="@string/about">
         <Preference
+            app:key="version_name"
             android:selectable="false"
-            android:summary="@string/version_name" />
+            android:summary="@string/version_name"/>
 
         <Preference
             app:title="@string/rate"
+            app:key="rate_us"
             android:summary="@string/rate_summery" />
 
         <Preference
             app:title="@string/bug_report"
-            app:key="feedback"
+            app:key="report_bug"
             android:summary="@string/bug_report_summery" />
     </PreferenceCategory>
-
-
-
-
 </PreferenceScreen>

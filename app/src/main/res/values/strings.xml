@@ -112,11 +112,12 @@
     <string name="show_hidden_off">Off</string>
     <string name="restart_after_change_setting">Please note that app will restart immediately after change setting</string>
     <string name="about">About</string>
-    <string name="version_name">"version: 1.0"</string>
+    <string name="version_name">Version: 1.7</string>
     <string name="rate">Rate us</string>
     <string name="rate_summery">Your rate and review help us better</string>
     <string name="bug_report">Report bugs</string>
     <string name="bug_report_summery">Some information about the device will be included in the report to help fix bugs</string>
     <string name="choose_email_client" translatable="false">Choose email client</string>
     <string name="no_contents">Sorry, no content</string>
+    <string name="no_sd_card">No SD card mounted</string>
 </resources>

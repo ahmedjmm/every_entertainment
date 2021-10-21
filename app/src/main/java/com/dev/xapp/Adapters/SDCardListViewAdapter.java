@@ -53,7 +53,6 @@ public class SDCardListViewAdapter extends ArrayAdapter<Folders> implements Popu
     public static List<Folders> list;
     List<Folders> cancelSearchList;
     public static SparseBooleanArray checkStates;
-    ListFilter listFilter;
     ViewHolder viewHolder;
     private int selectedPosition;
 
@@ -62,7 +61,7 @@ public class SDCardListViewAdapter extends ArrayAdapter<Folders> implements Popu
         this.context = context;
         SDCardListViewAdapter.list = list;
         cancelSearchList = list;
-        checkStates = new SparseBooleanArray(list.size());
+        checkStates = new SparseBooleanArray(cancelSearchList.size());
     }
 
     public static void selectAll() {
@@ -83,13 +82,13 @@ public class SDCardListViewAdapter extends ArrayAdapter<Folders> implements Popu
 
     @Override
     public int getCount() {
-        return list.size();
+        return cancelSearchList.size();
     }
 
-    @Override
-    public Folders getItem(int position) {
-        return list.get(position);
-    }
+//    @Override
+//    public Folders getItem(int position) {
+//        return cancelSearchList.get(position);
+//    }
 
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
@@ -110,7 +109,7 @@ public class SDCardListViewAdapter extends ArrayAdapter<Folders> implements Popu
             viewHolder = (ViewHolder) view.getTag();
         }
 
-        final Folders folders = list.get(position);
+        final Folders folders = cancelSearchList.get(position);
 
         viewHolder.folderIcon.setImageResource(folders.getFolderIcon());
 
@@ -398,9 +397,7 @@ public class SDCardListViewAdapter extends ArrayAdapter<Folders> implements Popu
     @NonNull
     @Override
     public Filter getFilter() {
-        if (listFilter == null)
-            listFilter = new ListFilter();
-        return listFilter;
+        return new ListFilter();
     }
 
     private class ListFilter extends Filter {
@@ -430,15 +427,16 @@ public class SDCardListViewAdapter extends ArrayAdapter<Folders> implements Popu
                         long size = Folders.getFolderSize(file);
                         cancelSearchList.add(new Folders(R.drawable.ic_file, file, size));
                     }
-                results.count = cancelSearchList.size();
-                results.values = cancelSearchList;
+                    list = cancelSearchList;
+                    results.count = cancelSearchList.size();
+                    results.values = cancelSearchList;
             }
             return results;
         }
 
         @Override
         protected void publishResults(CharSequence constraint, FilterResults results) {
-            list = (List<Folders>) results.values;
+            cancelSearchList = (List<Folders>) results.values;
             SDCardFragment.foldersList = list;
             notifyDataSetChanged();
         }
