@@ -21,11 +21,32 @@ import com.dev.xapp.Adapters.SDCardListViewAdapter;
 import com.dev.xapp.R;
 import com.google.android.material.tabs.TabLayout;
 
+import java.util.Collections;
+
 public class StorageFragment extends Fragment {
     ViewPager viewPager;
     public static TabLayout tabLayout;
     public static Toolbar toolbar;
     StoragePagerAdapter storagePagerAdapter;
+    private static StorageFragment storageFragment;
+
+    private StorageFragment(){}
+
+    public static StorageFragment getInstance() {
+        if(storageFragment == null) {
+            // Here we just use synchronized when the first object
+            // is created
+            synchronized(StorageFragment.class){
+                if(storageFragment == null) {
+                    // If the instance isn't needed it isn't created
+                    // This is known as lazy instantiation
+                    storageFragment = new StorageFragment();
+                }
+            }
+        }
+        // Under either circumstance this returns the instance
+        return storageFragment;
+    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -69,7 +90,7 @@ public class StorageFragment extends Fragment {
         return view;
     }
 
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public static class StoragePagerAdapter extends FragmentPagerAdapter {
         Context context;
 

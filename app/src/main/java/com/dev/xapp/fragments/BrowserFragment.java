@@ -226,10 +226,10 @@ public class BrowserFragment extends Fragment {
         });
     }
 
-    public void addWebToHistory(String webTitle, String url){
+    public void addWebToHistory(String webTitle, String url, Context context){
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
         currentDate = simpleDateFormat.format(new Date());
-        historyDatabase = Room.databaseBuilder(requireContext(), HistoryDatabase.class, "History")
+        historyDatabase = Room.databaseBuilder(context, HistoryDatabase.class, "History")
                 .allowMainThreadQueries().build();
         Wrapper wrapper;
         try {
@@ -262,7 +262,8 @@ public class BrowserFragment extends Fragment {
         @Override
         public void onPageFinished(WebView view, String url) {
             super.onPageFinished(view, url);
-            addWebToHistory(view.getTitle(), view.getUrl());
+            if(getContext() != null)
+                addWebToHistory(view.getTitle(), view.getUrl(), getContext());
             urlEditText.setText(webTitle);
             swipeRefreshLayout.setRefreshing(false);
             if(!urlFinished.equals(url)){

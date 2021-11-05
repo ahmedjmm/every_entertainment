@@ -254,7 +254,7 @@ public class MemoryFragment extends Fragment {
                                             cursor.getString(5),
                                             cursor.getString(audioProjection.length-1)));
                                 } while (cursor.moveToNext());
-                                Objects.requireNonNull(cursor).close();
+                            Objects.requireNonNull(cursor).close();
                             intent = new Intent(getContext(), MusicPlayerActivity.class);
                             intent.putExtra("serviceState", true);
                             intent.putParcelableArrayListExtra("songsList", songArrayList);
@@ -326,11 +326,11 @@ public class MemoryFragment extends Fragment {
                             ArrayList<String> foldersPath = Folders.getCheckedFoldersPaths(foldersList);
                             Intent moveOrCopyIntent = new Intent(getActivity(), MoveOrCopyActivity.class);
                             switch (which) {
-                                    case 0:
-                                        moveOrCopyIntent.putStringArrayListExtra("names", foldersName);
-                                        moveOrCopyIntent.putStringArrayListExtra("paths", foldersPath);
-                                        moveOrCopyIntent.putExtra("destination", "internal");
-                                        break;
+                                case 0:
+                                    moveOrCopyIntent.putStringArrayListExtra("names", foldersName);
+                                    moveOrCopyIntent.putStringArrayListExtra("paths", foldersPath);
+                                    moveOrCopyIntent.putExtra("destination", "internal");
+                                    break;
 //                                case 1:
 //                                    moveOrCopyIntent.putStringArrayListExtra("names", foldersName);
 //                                    moveOrCopyIntent.putStringArrayListExtra("paths", foldersPath);
@@ -406,7 +406,7 @@ public class MemoryFragment extends Fragment {
                                     Folders.foldersName.clear();
                                     progressDialog.dismiss();
                                     requireActivity().getSupportFragmentManager().beginTransaction().
-                                            replace(R.id.frame_container, new StorageFragment()).commit();
+                                            replace(R.id.frame_container, StorageFragment.getInstance()).commit();
                                 }
                             }.execute();
                         } catch (Exception e) {

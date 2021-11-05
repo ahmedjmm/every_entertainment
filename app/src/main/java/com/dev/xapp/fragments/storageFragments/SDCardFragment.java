@@ -151,14 +151,14 @@ public class SDCardFragment extends Fragment {
                             if(newSubFoundFolders.getName().startsWith("."))
                                 continue;
                             else
-                                if (newSubFoundFolders.isDirectory()) {
-                                    long size = Folders.getFolderSize(newSubFoundFolders);
-                                    foldersList.add(new Folders(R.drawable.ic_folders, newSubFoundFolders, size));
-                                }
-                                else {
-                                    long size = Folders.getFolderSize(newSubFoundFolders);
-                                    foldersList.add(new Folders(R.drawable.ic_file, newSubFoundFolders, size));
-                                }
+                            if (newSubFoundFolders.isDirectory()) {
+                                long size = Folders.getFolderSize(newSubFoundFolders);
+                                foldersList.add(new Folders(R.drawable.ic_folders, newSubFoundFolders, size));
+                            }
+                            else {
+                                long size = Folders.getFolderSize(newSubFoundFolders);
+                                foldersList.add(new Folders(R.drawable.ic_file, newSubFoundFolders, size));
+                            }
                         }
                 }
                 else {
@@ -391,7 +391,7 @@ public class SDCardFragment extends Fragment {
                                     Folders.foldersName.clear();
                                     progressDialog.dismiss();
                                     requireActivity().getSupportFragmentManager().beginTransaction().
-                                            replace(R.id.frame_container, new StorageFragment()).commit();
+                                            replace(R.id.frame_container, StorageFragment.getInstance()).commit();
                                 }
                             }.execute();
                         } catch (Exception e) {

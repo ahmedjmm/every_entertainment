@@ -268,7 +268,7 @@ public class SDCardListViewAdapter extends ArrayAdapter<Folders> implements Popu
                             Folders.foldersName.clear();
                             progressDialog.dismiss();
                             ((FragmentActivity)context).getSupportFragmentManager().beginTransaction().
-                                    replace(R.id.frame_container, new StorageFragment()).commit();
+                                    replace(R.id.frame_container, StorageFragment.getInstance()).commit();
                         }
                     }.execute();
                 } catch (Exception e) {
@@ -427,9 +427,9 @@ public class SDCardListViewAdapter extends ArrayAdapter<Folders> implements Popu
                         long size = Folders.getFolderSize(file);
                         cancelSearchList.add(new Folders(R.drawable.ic_file, file, size));
                     }
-                    list = cancelSearchList;
-                    results.count = cancelSearchList.size();
-                    results.values = cancelSearchList;
+                list = cancelSearchList;
+                results.count = cancelSearchList.size();
+                results.values = cancelSearchList;
             }
             return results;
         }

@@ -1,5 +1,7 @@
 package com.dev.xapp.activities;
 
+import static java.lang.System.exit;
+
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
@@ -12,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentFactory;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.preference.PreferenceManager;
 
@@ -19,6 +22,7 @@ import com.dev.xapp.R;
 import com.dev.xapp.fragments.BrowserFragment;
 import com.dev.xapp.fragments.GalleryFragment;
 import com.dev.xapp.fragments.MusicFragment;
+import com.dev.xapp.fragments.storageFragments.MemoryFragment;
 import com.dev.xapp.fragments.storageFragments.StorageFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -30,6 +34,8 @@ import java.util.Locale;
 public class MainActivity extends AppCompatActivity {
     public static BottomNavigationView bottomNavigationView;
     private final int REQUEST_CODE_ASK_PERMISSIONS = 1;
+    Fragment fragment;
+    private long backPressedTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,19 +53,23 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigationView.setOnNavigationItemSelectedListener(menuItem -> {
             switch (menuItem.getItemId()) {
                 case R.id.navigation_storage:
-                    loadFragment(new StorageFragment());
+//                    fragment = new StorageFragment();
+                    loadFragment(StorageFragment.getInstance());
                     return true;
                 case R.id.navigation_gallery:
-                    loadFragment(new GalleryFragment());
+//                    fragment = new GalleryFragment();
+                    loadFragment(GalleryFragment.getInstance());
                     return true;
                 case R.id.navigation_music:
-                    loadFragment(new MusicFragment());
+                    fragment = new MusicFragment();
+                    loadFragment(fragment);
                     return true;
                 case R.id.navigation_browser:
-                    loadFragment(new BrowserFragment());
+                    fragment = new BrowserFragment();
+                    loadFragment(fragment);
                     return true;
             }
-            return true;
+            return false;
         });
     }
 
@@ -104,12 +114,28 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
             // all permissions were granted
-            loadFragment(new StorageFragment());
+            loadFragment(StorageFragment.getInstance());
         }
     }
 
     @Override
-    public void onBackPressed() { }
+    public void onBackPressed() {
+        if (backPressedTime + 3000 > System.currentTimeMillis()) {
+            if(getSupportFragmentManager().getBackStackEntryCount() > 0){
+                int count = getSupportFragmentManager().getBackStackEntryCount();
+                for(int x = 0; x <= count; x++){
+                    getSupportFragmentManager().popBackStack();
+                }
+                super.onBackPressed();
+                this.finishAffinity();
+//                this.finishAndRemoveTask();   //to remove task of root activity (MainActivity)
+            }
+        }
+        else {
+            Toast.makeText(getBaseContext(), R.string.back_pressed, Toast.LENGTH_SHORT).show();
+        }
+        backPressedTime = System.currentTimeMillis();
+    }
 
     @Override
     protected void onResume() {

@@ -85,4 +85,5 @@
     <string name="bug_report_summery">سيتم تضمين بعض المعلومات عن الجهاز في التقرير للمساعدة في اصلاح الاخطاء</string>
     <string name="no_contents">عذرا ، لا يوجد محتوى</string>
     <string name="no_sd_card">لا يوجد ذاكرة خارجية</string>
+    <string name="back_pressed">اضغط رجوع مرة اخرى للخروج</string>
 </resources>

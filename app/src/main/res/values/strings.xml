@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name" translatable="false">every entertainment</string>
+    <string name="app_name" translatable="false">Every entertainment</string>
 
     <!-- storage tab's names -->
     <string name="sd_card">SD Card</string>
@@ -120,4 +120,5 @@
     <string name="choose_email_client" translatable="false">Choose email client</string>
     <string name="no_contents">Sorry, no content</string>
     <string name="no_sd_card">No SD card mounted</string>
+    <string name="back_pressed">press back again to exit</string>
 </resources>

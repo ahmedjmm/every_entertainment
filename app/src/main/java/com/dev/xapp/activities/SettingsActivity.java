@@ -78,10 +78,8 @@ public class SettingsActivity extends AppCompatActivity {
                     if (task.isSuccessful()) {
                         // We can get the ReviewInfo object
                         ReviewInfo reviewInfo = task.getResult();
-                        Toast.makeText(getContext(), "1", Toast.LENGTH_SHORT).show();
                         Task<Void> flow = manager.launchReviewFlow(requireActivity(), reviewInfo);
                         flow.addOnCompleteListener(task2 -> {
-                            Toast.makeText(getContext(), "2", Toast.LENGTH_SHORT).show();
                             // The flow has finished. The API does not indicate whether the user
                             // reviewed or not, or even whether the review dialog was shown. Thus, no
                             // matter the result, we continue our app flow.
@@ -91,7 +89,6 @@ public class SettingsActivity extends AppCompatActivity {
 //                        @ReviewErrorCode int reviewErrorCode = ((TaskException) task.getException()).getErrorCode();
                     }
                 });
-
                 return true;
             });
 

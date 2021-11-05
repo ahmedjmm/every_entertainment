@@ -18,6 +18,7 @@ import android.graphics.drawable.GradientDrawable;
 import android.media.AudioManager;
 import android.media.MediaMetadataRetriever;
 import android.media.MediaPlayer;
+import android.net.MailTo;
 import android.net.Uri;
 import android.os.Binder;
 import android.os.Bundle;
@@ -463,8 +464,17 @@ public class MusicPlayerActivity extends AppCompatActivity implements ServiceCon
     public void onServiceConnected(ComponentName name, IBinder service) {
         MusicService.MyBinder myBinder = (MusicService.MyBinder) service;
         musicService = myBinder.getMusicService();
-        if(songList == null)
-            songList = MusicService.songArrayList;
+//        check if the playlist of the MusicService is null, if so this means that the service is null
+//        so we start the app from its launcher activity (MainActivity) to prevent null exception
+//        of MusicService.songsArrayList.
+        if(MusicService.songArrayList == null){
+            Intent intent = new Intent(MusicPlayerActivity.this, MainActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
+            finish();
+            return;
+        }
+        songList = MusicService.songArrayList;
         playListAdapter = new PlayListAdapter(getApplicationContext(), songList);
         listView.setAdapter(playListAdapter);
         String title = getResources().getString(R.string.play_list);
@@ -606,7 +616,10 @@ public class MusicPlayerActivity extends AppCompatActivity implements ServiceCon
                         break;
                 }
             }
-            return START_STICKY;
+//            Use this return statement to make sure that the service won't start/restart by itself after
+//            closing it from music player notification to avoid null exception of MusicService.songArrayList
+//            when starting the app again from task manager after closing.
+            return START_NOT_STICKY;
         }
 
         void showNotification(int playPauseButton){
