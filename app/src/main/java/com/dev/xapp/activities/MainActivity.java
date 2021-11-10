@@ -53,12 +53,12 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigationView.setOnNavigationItemSelectedListener(menuItem -> {
             switch (menuItem.getItemId()) {
                 case R.id.navigation_storage:
-//                    fragment = new StorageFragment();
-                    loadFragment(StorageFragment.getInstance());
+                    fragment = new StorageFragment();
+                    loadFragment(fragment);
                     return true;
                 case R.id.navigation_gallery:
-//                    fragment = new GalleryFragment();
-                    loadFragment(GalleryFragment.getInstance());
+                    fragment = new GalleryFragment();
+                    loadFragment(fragment);
                     return true;
                 case R.id.navigation_music:
                     fragment = new MusicFragment();
@@ -114,7 +114,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
             // all permissions were granted
-            loadFragment(StorageFragment.getInstance());
+            loadFragment(new StorageFragment());
         }
     }
 

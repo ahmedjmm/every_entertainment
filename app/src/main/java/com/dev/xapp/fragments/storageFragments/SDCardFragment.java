@@ -391,7 +391,7 @@ public class SDCardFragment extends Fragment {
                                     Folders.foldersName.clear();
                                     progressDialog.dismiss();
                                     requireActivity().getSupportFragmentManager().beginTransaction().
-                                            replace(R.id.frame_container, StorageFragment.getInstance()).commit();
+                                            replace(R.id.frame_container, new StorageFragment()).commit();
                                 }
                             }.execute();
                         } catch (Exception e) {

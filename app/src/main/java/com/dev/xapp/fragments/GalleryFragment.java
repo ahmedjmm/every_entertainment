@@ -44,26 +44,6 @@ public class GalleryFragment extends Fragment {
     TabLayout tabLayout;
     GalleryPagerAdapter galleryPagerAdapter;
 
-    private static GalleryFragment galleryFragment = null;
-
-    private GalleryFragment(){}
-
-    public static GalleryFragment getInstance() {
-        if(galleryFragment == null) {
-            // Here we just use synchronized when the first object
-            // is created
-            synchronized(StorageFragment.class){
-                if(galleryFragment == null) {
-                    // If the instance isn't needed it isn't created
-                    // This is known as lazy instantiation
-                    galleryFragment = new GalleryFragment();
-                }
-            }
-        }
-        // Under either circumstance this returns the instance
-        return galleryFragment;
-    }
-
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

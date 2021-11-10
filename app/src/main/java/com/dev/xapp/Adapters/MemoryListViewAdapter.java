@@ -256,7 +256,7 @@ public class MemoryListViewAdapter extends ArrayAdapter<Folders> implements Popu
                             Folders.foldersName.clear();
                             progressDialog.dismiss();
                             ((FragmentActivity)context).getSupportFragmentManager().beginTransaction().
-                                    replace(R.id.frame_container, StorageFragment.getInstance()).commit();
+                                    replace(R.id.frame_container, new StorageFragment()).commit();
                         }
                     }.execute();
                 } catch (Exception e) {
