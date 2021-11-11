@@ -35,6 +35,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.dev.everyEntertainment.R;
 import com.dev.xapp.Adapters.RecyclerViewAdapter;
 import com.dev.xapp.Adapters.SDCardListViewAdapter;
 import com.dev.xapp.Folders;
@@ -42,7 +43,6 @@ import com.dev.xapp.Song;
 import com.dev.xapp.activities.ImageViewerActivity;
 import com.dev.xapp.activities.MainActivity;
 import com.dev.xapp.activities.MoveOrCopyActivity;
-import com.dev.xapp.R;
 import com.dev.xapp.activities.MusicPlayerActivity;
 import com.dev.xapp.activities.SettingsActivity;
 import com.dev.xapp.activities.VideoPlayerActivity;

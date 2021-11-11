@@ -3,6 +3,8 @@ package com.dev.xapp;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 
+import com.dev.everyEntertainment.R;
+
 public class Application extends android.app.Application {
     public static final String media_player_channel_id = "mediaPlayerChannel";
 //    public static final String channel_2_id = "channel2";

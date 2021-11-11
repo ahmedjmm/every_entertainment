@@ -21,8 +21,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.dev.everyEntertainment.R;
 import com.dev.xapp.BrowserTab;
-import com.dev.xapp.R;
 import com.dev.xapp.fragments.BrowserFragment;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 

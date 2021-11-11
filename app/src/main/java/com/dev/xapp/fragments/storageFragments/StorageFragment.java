@@ -17,8 +17,8 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import com.dev.everyEntertainment.R;
 import com.dev.xapp.Adapters.SDCardListViewAdapter;
-import com.dev.xapp.R;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.Collections;

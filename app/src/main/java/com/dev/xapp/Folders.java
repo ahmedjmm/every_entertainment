@@ -2,6 +2,7 @@ package com.dev.xapp;
 
 import android.content.Context;
 
+import com.dev.everyEntertainment.R;
 import com.dev.xapp.Adapters.MemoryListViewAdapter;
 import com.dev.xapp.Adapters.MoveOrCopyListViewAdapter;
 import com.dev.xapp.Adapters.MoveOrCopyRecyclerViewAdapter;

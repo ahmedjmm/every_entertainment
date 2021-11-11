@@ -47,9 +47,9 @@ import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.palette.graphics.Palette;
 
 import com.bumptech.glide.Glide;
+import com.dev.everyEntertainment.R;
 import com.dev.xapp.Application;
 import com.dev.xapp.NotificationReceiver;
-import com.dev.xapp.R;
 import com.dev.xapp.Song;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 

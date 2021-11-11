@@ -16,7 +16,7 @@ import android.widget.BaseExpandableListAdapter;
 import android.widget.ExpandableListView;
 import android.widget.TextView;
 
-import com.dev.xapp.R;
+import com.dev.everyEntertainment.R;
 import com.dev.xapp.database.history.HistoryContents;
 import com.dev.xapp.database.history.HistoryDatabase;
 import com.dev.xapp.database.history.Wrapper;

@@ -22,7 +22,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.dev.xapp.R;
+import com.dev.everyEntertainment.R;
 import com.dev.xapp.Song;
 import com.dev.xapp.fragments.MusicFragment;
 

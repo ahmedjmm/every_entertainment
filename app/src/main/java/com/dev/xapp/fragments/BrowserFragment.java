@@ -41,9 +41,9 @@ import androidx.preference.PreferenceManager;
 import androidx.room.Room;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.dev.everyEntertainment.R;
 import com.dev.xapp.BrowserTab;
 import com.dev.xapp.activities.BrowserTabsActivity;
-import com.dev.xapp.R;
 
 import com.dev.xapp.activities.BrowserHistoryActivity;
 import com.dev.xapp.activities.SettingsActivity;

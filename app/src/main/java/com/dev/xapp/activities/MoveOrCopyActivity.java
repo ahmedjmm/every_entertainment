@@ -21,10 +21,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+
+import com.dev.everyEntertainment.R;
 import com.dev.xapp.Adapters.MoveOrCopyListViewAdapter;
 import com.dev.xapp.Adapters.MoveOrCopyRecyclerViewAdapter;
 import com.dev.xapp.Folders;
-import com.dev.xapp.R;
 import com.dev.xapp.fragments.storageFragments.MemoryFragment;
 import com.dev.xapp.fragments.storageFragments.SDCardFragment;
 

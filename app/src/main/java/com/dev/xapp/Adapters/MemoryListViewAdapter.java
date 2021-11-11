@@ -30,9 +30,9 @@ import androidx.annotation.NonNull;
 import androidx.core.content.FileProvider;
 import androidx.fragment.app.FragmentActivity;
 
+import com.dev.everyEntertainment.R;
 import com.dev.xapp.Folders;
 import com.dev.xapp.activities.MoveOrCopyActivity;
-import com.dev.xapp.R;
 import com.dev.xapp.fragments.storageFragments.MemoryFragment;
 import com.dev.xapp.fragments.storageFragments.StorageFragment;
 

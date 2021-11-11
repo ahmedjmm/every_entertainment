@@ -26,9 +26,9 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.dev.everyEntertainment.R;
 import com.dev.xapp.activities.ImagesAlbumActivity;
 import com.dev.xapp.ImageVideo;
-import com.dev.xapp.R;
 import com.dev.xapp.activities.VideosAlbumActivity;
 import com.dev.xapp.fragments.storageFragments.MemoryFragment;
 import com.dev.xapp.fragments.storageFragments.SDCardFragment;

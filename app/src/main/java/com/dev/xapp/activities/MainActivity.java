@@ -18,7 +18,7 @@ import androidx.fragment.app.FragmentFactory;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.preference.PreferenceManager;
 
-import com.dev.xapp.R;
+import com.dev.everyEntertainment.R;
 import com.dev.xapp.fragments.BrowserFragment;
 import com.dev.xapp.fragments.GalleryFragment;
 import com.dev.xapp.fragments.MusicFragment;

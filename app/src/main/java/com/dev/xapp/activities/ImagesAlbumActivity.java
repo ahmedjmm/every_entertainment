@@ -16,8 +16,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.dev.everyEntertainment.R;
 import com.dev.xapp.ImageVideo;
-import com.dev.xapp.R;
 
 import java.io.File;
 import java.util.List;

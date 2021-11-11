@@ -16,7 +16,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.dev.xapp.R;
+import com.dev.everyEntertainment.R;
 import com.github.chrisbanes.photoview.PhotoView;
 
 import java.io.File;

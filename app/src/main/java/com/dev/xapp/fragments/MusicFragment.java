@@ -34,7 +34,7 @@ import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.bumptech.glide.Glide;
-import com.dev.xapp.R;
+import com.dev.everyEntertainment.R;
 import com.dev.xapp.Song;
 import com.dev.xapp.activities.AlbumsAndArtistsDetailsActivity;
 import com.dev.xapp.activities.MusicPlayerActivity;
