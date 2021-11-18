@@ -26,6 +26,7 @@ import android.os.Handler;
 import android.os.IBinder;
 import android.preference.PreferenceManager;
 import android.support.v4.media.session.MediaSessionCompat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -609,7 +610,7 @@ public class MusicPlayerActivity extends AppCompatActivity implements ServiceCon
                         editor.commit();
                         break;
                     case"dismiss":
-                        pause();
+                        release();
                         stopSelf();
                         LocalBroadcastManager localBroadcastManager = LocalBroadcastManager.getInstance(MusicService.this);
                         localBroadcastManager.sendBroadcast(new Intent("finishActivity"));
@@ -699,10 +700,12 @@ public class MusicPlayerActivity extends AppCompatActivity implements ServiceCon
 
         @Override
         public void onAudioFocusChange(int focusChange) {
-            if(focusChange <= 0)
-                mediaPlayer.pause();
-            else
-                mediaPlayer.start();
+            try {
+                if(focusChange <= 0)
+                    mediaPlayer.pause();
+                else
+                    mediaPlayer.start();
+            }catch (IllegalStateException ignored){ }
         }
 
         public class MyBinder extends Binder{
