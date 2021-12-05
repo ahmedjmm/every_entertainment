@@ -483,7 +483,6 @@ public class MusicPlayerActivity extends AppCompatActivity implements ServiceCon
         listView.setOnItemClickListener((parent, view, position, id) -> {
             MusicPlayerActivity.position = position;
             musicService.stop();
-            musicService.release();
             musicService.createMediaPlayer(MusicPlayerActivity.position);
             metaDataRetriever(Uri.parse(songList.get(MusicPlayerActivity.position).path));
             seekBar.setMax(musicService.getDuration() / 1000);
@@ -518,6 +517,7 @@ public class MusicPlayerActivity extends AppCompatActivity implements ServiceCon
 
     @Override
     public void onServiceDisconnected(ComponentName name) {
+        musicService.stop();
         musicService = null;
         handler.removeCallbacks(runnable);
     }
@@ -580,6 +580,14 @@ public class MusicPlayerActivity extends AppCompatActivity implements ServiceCon
             audioManager.requestAudioFocus(this, AudioManager.STREAM_MUSIC, AudioManager.AUDIOFOCUS_GAIN);
         }
 
+        @Override
+        public void onDestroy() {
+            super.onDestroy();
+            stop();
+            release();
+            mediaPlayer = null;
+        }
+
         @Nullable
         @Override
         public IBinder onBind(Intent intent) {
@@ -610,7 +618,7 @@ public class MusicPlayerActivity extends AppCompatActivity implements ServiceCon
                         editor.commit();
                         break;
                     case"dismiss":
-                        release();
+                        stop();
                         stopSelf();
                         LocalBroadcastManager localBroadcastManager = LocalBroadcastManager.getInstance(MusicService.this);
                         localBroadcastManager.sendBroadcast(new Intent("finishActivity"));
@@ -700,6 +708,8 @@ public class MusicPlayerActivity extends AppCompatActivity implements ServiceCon
 
         @Override
         public void onAudioFocusChange(int focusChange) {
+            /* we use try catch block to avoid IllegalStateException when service stops and the system starts it
+             because of audio focus change (example: when start a call after stops)*/
             try {
                 if(focusChange <= 0)
                     mediaPlayer.pause();
