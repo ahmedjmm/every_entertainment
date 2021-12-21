@@ -3,6 +3,7 @@ package com.dev.xapp.activities;
 import static java.lang.System.exit;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.content.res.Resources;
@@ -127,7 +128,7 @@ public class MainActivity extends AppCompatActivity {
                     getSupportFragmentManager().popBackStack();
                 }
                 super.onBackPressed();
-                this.finishAffinity();
+                this.finishAffinity(); //use this to finish all activities that has the same affinity in a single task list
 //                this.finishAndRemoveTask();   //to remove task of root activity (MainActivity)
             }
         }

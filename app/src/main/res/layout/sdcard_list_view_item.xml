@@ -65,8 +65,7 @@
         android:layout_width="0dp"
         android:layout_weight="1"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:contentDescription="item menu">
+        android:layout_gravity="center_vertical">
     </ImageView>
 
     <CheckBox
@@ -75,8 +74,7 @@
         android:layout_weight="1"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
-        android:button="@drawable/custom_check_box"
-        android:visibility="gone">
+        android:button="@drawable/custom_check_box">
     </CheckBox>
 
 </LinearLayout>

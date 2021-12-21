@@ -8,13 +8,13 @@
     app:umanoDragView="@id/drag_view"
     app:umanoScrollableView="@id/list_view"
     android:gravity="bottom"
-    android:background="@android:color/background_light"
-    tools:context=".activities.MusicPlayerActivity">
+    android:background="@android:color/background_light">
 
     <LinearLayout
         android:orientation="vertical"
         android:id="@+id/linear_layout"
         android:layout_width="match_parent"
+
         android:layout_height="match_parent">
 
         <ScrollView
@@ -114,10 +114,11 @@
                 android:id="@+id/seek_bar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:scaleY=".5"
-                android:thumbTint="#E8D32E"
+                android:layout_alignParentBottom="true"
                 android:progressTint="@color/colorWhite"
-                android:layout_alignParentBottom="true"/>
+                android:scaleY="1"
+                android:scaleX="1"
+                android:thumbTint="#E8D32E" />
         </RelativeLayout>
 
         <LinearLayout
@@ -140,12 +141,13 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:padding="8dp"
                 android:src="@drawable/ic_baseline_play_arrow_24"
                 app:backgroundTint="#E1C5AF05"
                 app:borderWidth="0dp"
-                android:padding="8dp"
                 app:elevation="0dp"
-                app:fabSize="auto" />
+                app:fabSize="auto"
+                tools:ignore="SpeakableTextPresentCheck" />
 
             <ImageView
                 android:id="@+id/next"

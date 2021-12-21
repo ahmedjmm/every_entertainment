@@ -49,7 +49,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class MusicFragment extends Fragment {
-    Toolbar toolbar;
+    public Toolbar toolbar;
     TabLayout tabLayout;
     ViewPager2 viewPager2;
     ViewStateAdapter viewStateAdapter;
@@ -125,7 +125,7 @@ public class MusicFragment extends Fragment {
                 case 2:
                     return new ArtistsFragment();
             }
-            return null;
+            return new AllSongsFragment();
         }
 
         @Override
@@ -168,7 +168,6 @@ public class MusicFragment extends Fragment {
                 intent.putExtra("name", songsList.get(position).albumName);
                 intent.putExtra("tracksCount", songsList.get(position).tracksCount);
                 startActivity(intent);
-
             });
         }
 
@@ -350,6 +349,7 @@ public class MusicFragment extends Fragment {
             setHasOptionsMenu(true);
             loadAudioData();
             listViewAdapter = new ListViewAdapter(requireContext(), songsList);
+
         }
 
         @Nullable

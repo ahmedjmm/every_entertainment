@@ -3,6 +3,7 @@ package com.dev.xapp.activities;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.palette.graphics.Palette;
 
 import android.content.Context;
@@ -23,6 +24,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.dev.everyEntertainment.R;
+import com.dev.everyEntertainment.databinding.ActivityAlbumsAndArtistsDetailsBinding;
 import com.dev.xapp.Song;
 import com.dev.xapp.fragments.MusicFragment;
 
@@ -35,29 +37,42 @@ public class AlbumsAndArtistsDetailsActivity extends AppCompatActivity {
     ArrayList<Song> songList = new ArrayList<>();
     ListView listView;
     LinearLayout linearLayout;
+    ActivityAlbumsAndArtistsDetailsBinding binding;
+    int totalDuration;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_albums_and_artists_details);
+        binding = ActivityAlbumsAndArtistsDetailsBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+
+        Toolbar toolbar = binding.toolbar;
+        toolbar.setTitle(getIntent().getStringExtra("name"));
+        toolbar.setOnClickListener((v -> listView.smoothScrollToPosition(0)));
+
+        ImageView imageView = binding.albumCover;
+        TextView totalDuration = binding.totalDuration;
+        TextView tracksCount = binding.albumArtistMusicCount;
+
         songList.clear();
-        linearLayout = findViewById(R.id.linear_layout);
+        linearLayout = binding.linearLayout;
         switch (Objects.requireNonNull(getIntent().getStringExtra("idType"))){
             case "album tabId":
                 for(int x = 0; x < MusicFragment.AllSongsFragment.songsList.size(); x++)
-                    if(Objects.equals(getIntent().getStringExtra("tabId"), MusicFragment.AllSongsFragment.songsList.get(x).albumId))
+                    if(Objects.equals(getIntent().getStringExtra("tabId"), MusicFragment.AllSongsFragment.songsList.get(x).albumId)) {
                         songList.add(MusicFragment.AllSongsFragment.songsList.get(x));
+                        this.totalDuration += MusicFragment.AllSongsFragment.songsList.get(x).songDuration;
+                    }
                 break;
             case "artist tabId":
                 for(int x = 0; x < MusicFragment.AllSongsFragment.songsList.size(); x++)
-                    if(getIntent().getStringExtra("tabId").equals(MusicFragment.AllSongsFragment.songsList.get(x).artistId))
+                    if(getIntent().getStringExtra("tabId").equals(MusicFragment.AllSongsFragment.songsList.get(x).artistId)) {
                         songList.add(MusicFragment.AllSongsFragment.songsList.get(x));
+                        this.totalDuration += MusicFragment.AllSongsFragment.songsList.get(x).songDuration;
+                    }
                 break;
         }
 
-        final ImageView imageView = findViewById(R.id.album_cover);
-        final TextView name = findViewById(R.id.album_artist_name);
-        final TextView tracksCount = findViewById(R.id.album_artist_music_count);
         try {
             final byte[] bytes = Song.getAudioAlbumArt(songList.get(0).path);
             if(bytes != null){
@@ -68,10 +83,8 @@ public class AlbumsAndArtistsDetailsActivity extends AppCompatActivity {
                         GradientDrawable gradientDrawable = new GradientDrawable(GradientDrawable.Orientation.BOTTOM_TOP, new int[]{0xff000000, swatch.getRgb()});
                         linearLayout.setBackground(gradientDrawable);
                         Glide.with(getApplicationContext()).load(bytes).into(imageView);
-                        name.setText(getIntent().getStringExtra("name"));
-                        name.setTextColor(swatch.getTitleTextColor());
+                        totalDuration.setText(Song.durationConversion(this.totalDuration));
                         tracksCount.setText(getIntent().getStringExtra("tracksCount"));
-                        tracksCount.setTextColor(swatch.getBodyTextColor());
                     }
                 });
             }
@@ -83,10 +96,8 @@ public class AlbumsAndArtistsDetailsActivity extends AppCompatActivity {
                         GradientDrawable gradientDrawable = new GradientDrawable(GradientDrawable.Orientation.BOTTOM_TOP, new int[]{0xff000000, swatch.getRgb()});
                         linearLayout.setBackground(gradientDrawable);
                         Glide.with(getApplicationContext()).load(bitmap).into(imageView);
-                        name.setText(getIntent().getStringExtra("name"));
-                        name.setTextColor(swatch.getTitleTextColor());
+                        totalDuration.setText(Song.durationConversion(this.totalDuration));
                         tracksCount.setText(getIntent().getStringExtra("tracksCount"));
-                        tracksCount.setTextColor(swatch.getBodyTextColor());
                     }
                 });
             }
@@ -96,7 +107,7 @@ public class AlbumsAndArtistsDetailsActivity extends AppCompatActivity {
         }
 
         listViewAdapter = new ListViewAdapter(getApplicationContext(), songList);
-        listView = findViewById(R.id.list_view);
+        listView = binding.listView;
         listView.setAdapter(listViewAdapter);
         listView.setOnItemClickListener((parent, view, position, id) -> {
             Intent intent = new Intent(AlbumsAndArtistsDetailsActivity.this, MusicPlayerActivity.class);
