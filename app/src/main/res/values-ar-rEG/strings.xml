@@ -17,7 +17,7 @@
     <string name="delete">مسح</string>
     <string name="hide">اخفاء</string>
     <string name="select_all">اختيار الكل</string>
-    <string name="dismiss">ازالة جميع الاختيارات</string>
+    <string name="unselect_all">ازالة جميع الاختيارات</string>
     <string name="share">مشاركة</string>
     <string name="rename">اعادة تسمية</string>
     <string name="create_folder">مجلد جديد</string>
@@ -86,4 +86,10 @@
     <string name="no_contents">عذرا ، لا يوجد محتوى</string>
     <string name="no_sd_card">لا يوجد ذاكرة خارجية</string>
     <string name="back_pressed">اضغط رجوع مرة اخرى للخروج</string>
+    <string name="action_settings">الاعدادات</string>
+    <string name="alert_permissions_title">مطلوب إذن</string>
+    <string name="alert_permissions_message">يلزم إذن إدارة كل الملفات لإجراء عمليات على الملفات مثل النسخ والحذف ... ، اضغط على \"موافق\" لتنتقل بك إلى إعداد إذن التطبيق للسماح بالوصول الكامل للملفات أو \"إلغاء\" إذا كنت تريد فقط عرض الملفات</string>
+    <string name="dismiss_view">رفض</string>
+    <string name="manage_external_storage_permission_needed">مطلوب اذن ادارة الملفات</string>
+    <string name="permission_should_be_granted">يجب منح الاذن</string>
 </resources>

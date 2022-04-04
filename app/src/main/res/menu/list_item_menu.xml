@@ -28,7 +28,7 @@
 
     <item
         android:id="@+id/dismiss"
-        android:title="@string/dismiss"/>
+        android:title="@string/unselect_all"/>
 
     <item
         android:id="@+id/create_folder"

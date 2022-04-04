@@ -3,26 +3,47 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Ahmad/Documents/androidProjects/google versions/every entertainment/app/src/main/res/drawable-anydpi/ic_arrow.xml" value="0.206" />
+        <entry key="..\:/Users/Ahmad/Documents/androidProjects/google versions/every entertainment/app/src/main/res/drawable-anydpi/ic_arrow_down.xml" value="0.206" />
+        <entry key="..\:/Users/Ahmad/Documents/androidProjects/google versions/every entertainment/app/src/main/res/drawable-anydpi/ic_back_browser.xml" value="0.206" />
+        <entry key="..\:/Users/Ahmad/Documents/androidProjects/google versions/every entertainment/app/src/main/res/drawable-anydpi/ic_file.xml" value="0.2055" />
+        <entry key="..\:/Users/Ahmad/Documents/androidProjects/google versions/every entertainment/app/src/main/res/drawable-anydpi/ic_folders.xml" value="0.2055" />
+        <entry key="..\:/Users/Ahmad/Documents/androidProjects/google versions/every entertainment/app/src/main/res/drawable-anydpi/ic_gallery.xml" value="0.2055" />
+        <entry key="..\:/Users/Ahmad/Documents/androidProjects/google versions/every entertainment/app/src/main/res/drawable-anydpi/ic_home.xml" value="0.2055" />
+        <entry key="..\:/Users/Ahmad/Documents/androidProjects/google versions/every entertainment/app/src/main/res/drawable-anydpi/ic_music.xml" value="0.2055" />
+        <entry key="..\:/Users/Ahmad/Documents/androidProjects/google versions/every entertainment/app/src/main/res/drawable-anydpi/ic_new_folder.xml" value="0.2055" />
         <entry key="..\:/Users/Ahmad/Documents/androidProjects/google versions/every entertainment/app/src/main/res/drawable-v23/checked.xml" value="0.2703125" />
-        <entry key="..\:/Users/Ahmad/Documents/androidProjects/google versions/every entertainment/app/src/main/res/drawable/checked.xml" value="0.2703125" />
+        <entry key="..\:/Users/Ahmad/Documents/androidProjects/google versions/every entertainment/app/src/main/res/drawable/checked.xml" value="0.264" />
         <entry key="..\:/Users/Ahmad/Documents/androidProjects/google versions/every entertainment/app/src/main/res/drawable/custom_check_box.xml" value="0.2703125" />
         <entry key="..\:/Users/Ahmad/Documents/androidProjects/google versions/every entertainment/app/src/main/res/drawable/drawable_test.xml" value="0.2703125" />
         <entry key="..\:/Users/Ahmad/Documents/androidProjects/google versions/every entertainment/app/src/main/res/drawable/unchecked.xml" value="0.2703125" />
         <entry key="..\:/Users/Ahmad/Documents/androidProjects/google versions/every entertainment/app/src/main/res/layout/activity_album_images.xml" value="0.17572463768115942" />
         <entry key="..\:/Users/Ahmad/Documents/androidProjects/google versions/every entertainment/app/src/main/res/layout/activity_albums_and_artists_details.xml" value="0.16" />
+        <entry key="..\:/Users/Ahmad/Documents/androidProjects/google versions/every entertainment/app/src/main/res/layout/activity_main.xml" value="0.16168478260869565" />
+        <entry key="..\:/Users/Ahmad/Documents/androidProjects/google versions/every entertainment/app/src/main/res/layout/activity_main_contents.xml" value="0.24909420289855072" />
         <entry key="..\:/Users/Ahmad/Documents/androidProjects/google versions/every entertainment/app/src/main/res/layout/activity_music_player.xml" value="0.152" />
         <entry key="..\:/Users/Ahmad/Documents/androidProjects/google versions/every entertainment/app/src/main/res/layout/activity_scrolling.xml" value="0.1" />
         <entry key="..\:/Users/Ahmad/Documents/androidProjects/google versions/every entertainment/app/src/main/res/layout/activity_settings.xml" value="0.264" />
+        <entry key="..\:/Users/Ahmad/Documents/androidProjects/google versions/every entertainment/app/src/main/res/layout/album_grid_view_item.xml" value="0.23550724637681159" />
         <entry key="..\:/Users/Ahmad/Documents/androidProjects/google versions/every entertainment/app/src/main/res/layout/albums_and_artists_songs_item.xml" value="0.2427536231884058" />
         <entry key="..\:/Users/Ahmad/Documents/androidProjects/google versions/every entertainment/app/src/main/res/layout/content_scrolling.xml" value="0.21829710144927536" />
+        <entry key="..\:/Users/Ahmad/Documents/androidProjects/google versions/every entertainment/app/src/main/res/layout/fragment_browser.xml" value="0.2" />
+        <entry key="..\:/Users/Ahmad/Documents/androidProjects/google versions/every entertainment/app/src/main/res/layout/fragment_browser_custom_toolbar.xml" value="0.24909420289855072" />
         <entry key="..\:/Users/Ahmad/Documents/androidProjects/google versions/every entertainment/app/src/main/res/layout/fragment_card.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Ahmad/Documents/androidProjects/google versions/every entertainment/app/src/main/res/layout/fragment_gallery.xml" value="0.16530797101449277" />
         <entry key="..\:/Users/Ahmad/Documents/androidProjects/google versions/every entertainment/app/src/main/res/layout/fragment_memory.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Ahmad/Documents/androidProjects/google versions/every entertainment/app/src/main/res/layout/fragment_music.xml" value="0.24909420289855072" />
         <entry key="..\:/Users/Ahmad/Documents/androidProjects/google versions/every entertainment/app/src/main/res/layout/fragment_music_albums.xml" value="0.21014492753623187" />
         <entry key="..\:/Users/Ahmad/Documents/androidProjects/google versions/every entertainment/app/src/main/res/layout/fragment_music_all_songs.xml" value="0.2427536231884058" />
         <entry key="..\:/Users/Ahmad/Documents/androidProjects/google versions/every entertainment/app/src/main/res/layout/fragment_storage.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Ahmad/Documents/androidProjects/google versions/every entertainment/app/src/main/res/layout/fragment_web_custom_toolbar.xml" value="0.24909420289855072" />
         <entry key="..\:/Users/Ahmad/Documents/androidProjects/google versions/every entertainment/app/src/main/res/layout/memory_list_view_item.xml" value="0.13020833333333334" />
+        <entry key="..\:/Users/Ahmad/Documents/androidProjects/google versions/every entertainment/app/src/main/res/layout/recycler_view_adapter.xml" value="0.24954710144927536" />
         <entry key="..\:/Users/Ahmad/Documents/androidProjects/google versions/every entertainment/app/src/main/res/layout/sdcard_list_view_item.xml" value="0.13020833333333334" />
         <entry key="..\:/Users/Ahmad/Documents/androidProjects/google versions/every entertainment/app/src/main/res/layout/songs_item.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Ahmad/Documents/androidProjects/google versions/every entertainment/app/src/main/res/menu/menu_scrolling.xml" value="0.11354166666666667" />
+        <entry key="..\:/Users/Ahmad/Documents/androidProjects/google versions/every entertainment/app/src/main/res/menu/navigation_menu.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Ahmad/Documents/androidProjects/google versions/every entertainment/app/src/main/res/menu/storage_menu.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Ahmad/Documents/androidProjects/google versions/every entertainment/app/src/main/res/xml/root_preferences.xml" value="0.24010416666666667" />
       </map>
     </option>

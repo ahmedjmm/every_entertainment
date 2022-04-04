@@ -4,7 +4,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 
-import com.dev.xapp.activities.MusicPlayerActivity;
+import com.dev.xapp.views.activities.MusicPlayerActivity;
 
 import java.util.Objects;
 

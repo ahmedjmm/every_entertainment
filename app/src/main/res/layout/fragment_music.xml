@@ -13,18 +13,10 @@
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
         <androidx.appcompat.widget.Toolbar
-            android:id="@+id/tool_bar"
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_scrollFlags="enterAlways|scroll|snap">
-
-            <TextView
-                android:id="@+id/toolbar_title"
-                android:text="@string/app_name"
-                android:gravity="center"
-                style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
         </androidx.appcompat.widget.Toolbar>
 
         <com.google.android.material.tabs.TabLayout
@@ -32,6 +24,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#1db995"
+            app:tabIndicatorColor="@color/colorRed"
+            app:tabIndicatorHeight="2dp"
+            app:tabMode="fixed"
             app:tabGravity="fill">
         </com.google.android.material.tabs.TabLayout>
     </com.google.android.material.appbar.AppBarLayout>

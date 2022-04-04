@@ -23,10 +23,8 @@
                 android:top="11.5dp">
                 <rotate
                     android:fromDegrees="45">
-                    <shape
-                        android:shape="rectangle">
-                        <solid
-                            android:color="#fff"/>
+                    <shape android:shape="rectangle">
+                        <solid android:color="#ffff"/>
                     </shape>
                 </rotate>
             </item>
