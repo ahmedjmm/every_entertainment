@@ -20,7 +20,7 @@ import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public class MoveOrCopyRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
+public class MoveOrCopyRecyclerViewAdapter extends RecyclerView.Adapter<PathRecyclerViewAdapter.ViewHolder> {
     private final List<String> folderNames;
     Context context;
 
@@ -34,13 +34,13 @@ public class MoveOrCopyRecyclerViewAdapter extends RecyclerView.Adapter<Recycler
 
     @NonNull
     @Override
-    public RecyclerViewAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public PathRecyclerViewAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycler_view_adapter, parent, false);
-        return new RecyclerViewAdapter.ViewHolder(view);
+        return new PathRecyclerViewAdapter.ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerViewAdapter.ViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull PathRecyclerViewAdapter.ViewHolder holder, final int position) {
         holder.imageView.setImageResource(R.drawable.ic_arrow);
 //        if(MemoryFragment.isActionMode || SDCardFragment.isActionMode)
 //            holder.textView.setEnabled(false);

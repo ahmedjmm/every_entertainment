@@ -33,6 +33,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
@@ -131,6 +132,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         else{
+            List<String> deniedPermissions = new ArrayList<>();
             String[] permissions = new String[] {Manifest.permission.READ_EXTERNAL_STORAGE,
                     Manifest.permission.WRITE_EXTERNAL_STORAGE};
             for(String permission: permissions){
@@ -138,7 +140,10 @@ public class MainActivity extends AppCompatActivity {
                         != PackageManager.PERMISSION_GRANTED)
                     ActivityCompat.requestPermissions(this, new String[]{permission},
                             PERMISSIONS_REQUEST_CODE);
+                deniedPermissions.add(permission);
             }
+            if(!deniedPermissions.isEmpty())
+                loadFragment(new StorageFragment());
         }
     }
 
@@ -160,6 +165,7 @@ public class MainActivity extends AppCompatActivity {
                     deniedPermissions.add(permissions[index]);
                 }
             }
+            loadFragment(new StorageFragment());
             if(!deniedPermissions.isEmpty()){
                 Snackbar.make(coordinatorLayout, R.string.manage_external_storage_permission_needed,
                         Snackbar.LENGTH_LONG).setAnchorView(bottomNavigationView)
@@ -170,7 +176,6 @@ public class MainActivity extends AppCompatActivity {
                                 requestPermissionsForAPILessThanR();
                         }).show();
             }
-            loadFragment(new StorageFragment());
         }
     }
 

@@ -23,14 +23,14 @@ import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
+public class PathRecyclerViewAdapter extends RecyclerView.Adapter<PathRecyclerViewAdapter.ViewHolder> {
     private final List<String> folderNames;
     Context context;
 
     ExecutorService executorService = Executors.newSingleThreadExecutor();
     Handler handler = new Handler(Looper.getMainLooper());
 
-    public RecyclerViewAdapter(List<String> folderNames, Context context){
+    public PathRecyclerViewAdapter(List<String> folderNames, Context context){
         this.folderNames = folderNames;
         this.context = context;
     }
@@ -59,7 +59,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                     Folders.SDCardBackToFolder(position, folderNames,
                             SDCardFragment.foldersList, sort, isReverse, showHidden);
                     handler.post(()-> {
-                        SDCardFragment.sdCardListViewAdapter.notifyDataSetChanged();
+                        SDCardFragment.filesListViewAdapter.notifyDataSetChanged();
                         this.notifyDataSetChanged();
                     });
                 }
@@ -69,7 +69,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                     Folders.memoryBackToFolder(position, folderNames,
                             MemoryFragment.foldersList, sort, isReverse, showHidden);
                     handler.post(()-> {
-                        MemoryFragment.memoryListViewAdapter.notifyDataSetChanged();
+                        MemoryFragment.filesListViewAdapter.notifyDataSetChanged();
                         this.notifyDataSetChanged();
                     });
                 }

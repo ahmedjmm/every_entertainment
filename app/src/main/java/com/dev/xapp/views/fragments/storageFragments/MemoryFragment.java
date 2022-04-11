@@ -38,8 +38,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.dev.everyEntertainment.R;
-import com.dev.xapp.views.Adapters.MemoryListViewAdapter;
-import com.dev.xapp.views.Adapters.RecyclerViewAdapter;
+import com.dev.xapp.views.Adapters.FilesListViewAdapter;
+import com.dev.xapp.views.Adapters.PathRecyclerViewAdapter;
 import com.dev.xapp.models.Folders;
 import com.dev.xapp.views.activities.SettingsActivity;
 import com.dev.xapp.models.Song;
@@ -58,18 +58,14 @@ import java.util.concurrent.Executors;
 
 import static com.dev.xapp.models.Folders.sort;
 
-import io.reactivex.Observable;
-import io.reactivex.Observer;
-import io.reactivex.disposables.Disposable;
-
 public class MemoryFragment extends Fragment {
     public ListView listView;
     public static List<Folders> foldersList = new ArrayList<>();
-    public static MemoryListViewAdapter memoryListViewAdapter;
+    public static FilesListViewAdapter filesListViewAdapter;
     public static File rootDirectory;
     public static List<String> recyclerList = new ArrayList<>();
     public static RecyclerView recyclerView;
-    public static RecyclerViewAdapter recyclerViewAdapter;
+    public static PathRecyclerViewAdapter recyclerViewAdapter;
     public static boolean isActionMode = false, isReverse, showHidden;
     public static ActionMode actionMode = null;
     public static File currentFolder;
@@ -87,7 +83,7 @@ public class MemoryFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        memoryListViewAdapter.notifyDataSetChanged();
+        filesListViewAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -103,9 +99,9 @@ public class MemoryFragment extends Fragment {
                 recyclerList.clear();
                 recyclerViewAdapter.notifyDataSetChanged();
             }
-            if (memoryListViewAdapter != null) {
-                memoryListViewAdapter.clear();
-                memoryListViewAdapter.notifyDataSetChanged();
+            if (filesListViewAdapter != null) {
+                filesListViewAdapter.clear();
+                filesListViewAdapter.notifyDataSetChanged();
             }
         } catch (NullPointerException ignored) { }
 
@@ -149,7 +145,7 @@ public class MemoryFragment extends Fragment {
                 }
             }
         }
-        memoryListViewAdapter = new MemoryListViewAdapter(getContext(), foldersList);
+        filesListViewAdapter = new FilesListViewAdapter(getContext(), foldersList);
         sort = sharedPreferences.getString("memory_sort", "a to z");
         isReverse = sharedPreferences.getBoolean("memory_sort_isReverse", false);
         if(sort != null)
@@ -160,7 +156,7 @@ public class MemoryFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable final ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_memory, container, false);
+        View view = inflater.inflate(R.layout.fragment_files, container, false);
 
         requireActivity().sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.fromFile(rootDirectory)));
         searchView = view.findViewById(R.id.search_view);
@@ -172,7 +168,7 @@ public class MemoryFragment extends Fragment {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                memoryListViewAdapter.getFilter().filter(newText);
+                filesListViewAdapter.getFilter().filter(newText);
                 return true;
             }
         });
@@ -182,14 +178,14 @@ public class MemoryFragment extends Fragment {
                 LinearLayoutManager.HORIZONTAL, false);
         recyclerView.setLayoutManager(layoutManager);
         recyclerList.add(rootDirectory.getAbsolutePath());
-        recyclerViewAdapter = new RecyclerViewAdapter(recyclerList, getContext());
+        recyclerViewAdapter = new PathRecyclerViewAdapter(recyclerList, getContext());
         recyclerView.setAdapter(recyclerViewAdapter);
         swipeRefreshLayout = view.findViewById(R.id.swipe);
         swipeRefreshLayout.setRefreshing(true);
         swipeRefreshLayout.setOnRefreshListener(() -> {
             swipeRefreshLayout.setRefreshing(true);
             try {
-                memoryListViewAdapter.clear();
+                filesListViewAdapter.clear();
                 executorService.execute(()->{
                     File[] files = currentFolder.listFiles();
                     if(files != null) {
@@ -224,7 +220,7 @@ public class MemoryFragment extends Fragment {
                         isReverse = sharedPreferences.getBoolean("memory_sort_isReverse", false);
                         Folders.memorySort(sort, isReverse, foldersList);
                     }
-                    handler.post(()-> memoryListViewAdapter.notifyDataSetChanged());
+                    handler.post(()-> filesListViewAdapter.notifyDataSetChanged());
                 });
             }
             catch (NullPointerException ignored){ }
@@ -232,7 +228,7 @@ public class MemoryFragment extends Fragment {
         });
 
         listView = view.findViewById(R.id.list_view);
-        listView.setAdapter(memoryListViewAdapter);
+        listView.setAdapter(filesListViewAdapter);
         listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
         listView.setOnItemClickListener((parent, view1, position, id) -> {
             searchView.clearFocus();
@@ -245,7 +241,7 @@ public class MemoryFragment extends Fragment {
                     Folders.memoryNewFolders(position, foldersList, sort,
                             isReverse, showHidden);
                     handler.post(()->{
-                        memoryListViewAdapter.notifyDataSetChanged();
+                        filesListViewAdapter.notifyDataSetChanged();
                         recyclerViewAdapter.notifyDataSetChanged();
                     });
                 });
@@ -423,7 +419,7 @@ public class MemoryFragment extends Fragment {
                                 @Override
                                 protected void onPostExecute(Void unused) {
                                     super.onPostExecute(unused);
-                                    memoryListViewAdapter.notifyDataSetChanged();
+                                    filesListViewAdapter.notifyDataSetChanged();
                                     Folders.foldersPath.clear();
                                     Folders.foldersName.clear();
                                     progressDialog.dismiss();
@@ -436,10 +432,10 @@ public class MemoryFragment extends Fragment {
                         }
                         break;
                     case R.id.select_all:
-                        MemoryListViewAdapter.selectAll();
+                        FilesListViewAdapter.selectAll();
                         break;
                     case R.id.dismiss:
-                        MemoryListViewAdapter.dismiss();
+                        FilesListViewAdapter.dismiss();
                         break;
                 }
                 return true;
@@ -448,7 +444,7 @@ public class MemoryFragment extends Fragment {
             @Override
             public void onDestroyActionMode(ActionMode mode) {
                 isActionMode = false;
-                MemoryListViewAdapter.checkStates.clear();
+                FilesListViewAdapter.checkStates.clear();
                 for (Folders folder: foldersList)
                     folder.setSelected(false);
                 recyclerViewAdapter.notifyDataSetChanged();
@@ -508,7 +504,7 @@ public class MemoryFragment extends Fragment {
                         executorService.execute(()->{
                             sort = sharedPreferences.getString("memory_sort", "a to z");
                             Folders.memorySort(sort, finalIsReverse, foldersList);
-                            handler.post(()-> memoryListViewAdapter.notifyDataSetChanged());
+                            handler.post(()-> filesListViewAdapter.notifyDataSetChanged());
                         });
                     }
                 }).setNegativeButton(R.string.cancel_alert_dialog, (dialogInterface, i) -> dialogInterface.dismiss());
@@ -522,7 +518,7 @@ public class MemoryFragment extends Fragment {
                     editor.commit();
                 });
                 item.setChecked(true);
-                memoryListViewAdapter.notifyDataSetChanged();
+                filesListViewAdapter.notifyDataSetChanged();
                 break;
             case R.id.sort_small_to_large:
                 executorService.execute(()->{
@@ -532,7 +528,7 @@ public class MemoryFragment extends Fragment {
                     editor.commit();
                 });
                 item.setChecked(true);
-                memoryListViewAdapter.notifyDataSetChanged();
+                filesListViewAdapter.notifyDataSetChanged();
                 break;
             case R.id.sort_old_to_new:
                 executorService.execute(()->{
@@ -542,7 +538,7 @@ public class MemoryFragment extends Fragment {
                     editor.commit();
                 });
                 item.setChecked(true);
-                memoryListViewAdapter.notifyDataSetChanged();
+                filesListViewAdapter.notifyDataSetChanged();
                 break;
             case R.id.reverse_sort:
                 editor = sharedPreferences.edit();
@@ -563,7 +559,7 @@ public class MemoryFragment extends Fragment {
                         Folders.memorySort(sort, isReverse[0], foldersList);
                     }
                 });
-                memoryListViewAdapter.notifyDataSetChanged();
+                filesListViewAdapter.notifyDataSetChanged();
                 break;
             case R.id.settings:
                 startActivity(new Intent(getActivity(), SettingsActivity.class));

@@ -40,8 +40,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.dev.everyEntertainment.R;
-import com.dev.xapp.views.Adapters.RecyclerViewAdapter;
-import com.dev.xapp.views.Adapters.SDCardListViewAdapter;
+import com.dev.xapp.views.Adapters.FilesListViewAdapter;
+import com.dev.xapp.views.Adapters.PathRecyclerViewAdapter;
 import com.dev.xapp.models.Folders;
 import com.dev.xapp.models.Song;
 import com.dev.xapp.views.activities.ImageViewerActivity;
@@ -64,10 +64,10 @@ public class SDCardFragment extends Fragment {
     public ListView listView;
     public static String path;
     public static List<Folders> foldersList = new ArrayList<>();
-    public static SDCardListViewAdapter sdCardListViewAdapter;
+    public static FilesListViewAdapter filesListViewAdapter;
     public static List<String> recyclerList = new ArrayList<>();
     public static RecyclerView recyclerView;
-    public static RecyclerViewAdapter recyclerViewAdapter;
+    public static PathRecyclerViewAdapter recyclerViewAdapter;
     TextView emptyTextView;
     File sdCardRoot;
     SearchView searchView;
@@ -85,7 +85,7 @@ public class SDCardFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        sdCardListViewAdapter.notifyDataSetChanged();
+        filesListViewAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -94,18 +94,6 @@ public class SDCardFragment extends Fragment {
         setHasOptionsMenu(true);
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
         showHidden = sharedPreferences.getBoolean("hidden", false);
-        try {
-            if (recyclerList != null) {
-                recyclerList.clear();
-                recyclerViewAdapter.notifyDataSetChanged();
-            }
-
-            if (sdCardListViewAdapter != null) {
-                sdCardListViewAdapter.clear();
-                sdCardListViewAdapter.notifyDataSetChanged();
-            }
-        }
-        catch (NullPointerException ignored) { }
 
         try {
             sdCardRoot = new File("/storage");
@@ -152,13 +140,13 @@ public class SDCardFragment extends Fragment {
             }
         }
         catch (NullPointerException ignored){ }
-        sdCardListViewAdapter = new SDCardListViewAdapter(this.getContext(), foldersList);
+        filesListViewAdapter = new FilesListViewAdapter(this.getContext(), foldersList);
         isReverse = sharedPreferences.getBoolean("card_sort_isReverse", false);
         Folders.SDCardSort(Folders.sort, isReverse, foldersList);
     }
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = getLayoutInflater().inflate(R.layout.fragment_card, container, false);
+        View view = getLayoutInflater().inflate(R.layout.fragment_files, container, false);
         String sort = sharedPreferences.getString("card_sort", "a to z");
 
         searchView = view.findViewById(R.id.search_view);
@@ -170,23 +158,23 @@ public class SDCardFragment extends Fragment {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                sdCardListViewAdapter.getFilter().filter(newText);
+                filesListViewAdapter.getFilter().filter(newText);
                 return true;
             }
         });
 
-        recyclerView = view.findViewById(R.id.recycler_view_sdCard);
+        recyclerView = view.findViewById(R.id.recycler_view);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(),
                 LinearLayoutManager.HORIZONTAL, false);
         listView = view.findViewById(R.id.list_view);
         recyclerView.setLayoutManager(layoutManager);
-        recyclerViewAdapter = new RecyclerViewAdapter(recyclerList, getContext());
+        recyclerViewAdapter = new PathRecyclerViewAdapter(recyclerList, getContext());
         recyclerView.setAdapter(recyclerViewAdapter);
         swipeRefreshLayout = view.findViewById(R.id.swipe);
         swipeRefreshLayout.setRefreshing(true);
         swipeRefreshLayout.setOnRefreshListener(() -> {
             swipeRefreshLayout.setRefreshing(true);
-            sdCardListViewAdapter.clear();
+            filesListViewAdapter.clear();
             try {
                 executorService.execute(()->{
                     File[] files = currentFolder.listFiles();
@@ -223,14 +211,13 @@ public class SDCardFragment extends Fragment {
                         isReverse = sharedPreferences.getBoolean("memory_sort_isReverse", false);
                         Folders.SDCardSort(Folders.sort, isReverse, foldersList);
                     }
-                    handler.post(()-> sdCardListViewAdapter.notifyDataSetChanged());
+                    handler.post(()-> filesListViewAdapter.notifyDataSetChanged());
                 });
             }
             catch (NullPointerException ignored){ }
             swipeRefreshLayout.setRefreshing(false);
         });
-        listView.setAdapter(sdCardListViewAdapter);
-        emptyTextView = view.findViewById(R.id.empty_list_view);
+        listView.setAdapter(filesListViewAdapter);
         if(foldersList.isEmpty())
             listView.setEmptyView(emptyTextView);
         listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
@@ -245,7 +232,7 @@ public class SDCardFragment extends Fragment {
                     Folders.SDCardNewFolders(position, foldersList, sort,
                             isReverse, showHidden);
                     handler.post(()->{
-                        sdCardListViewAdapter.notifyDataSetChanged();
+                        filesListViewAdapter.notifyDataSetChanged();
                         recyclerViewAdapter.notifyDataSetChanged();
                     });
                 });
@@ -426,7 +413,7 @@ public class SDCardFragment extends Fragment {
                                 @Override
                                 protected void onPostExecute(Void unused) {
                                     super.onPostExecute(unused);
-                                    sdCardListViewAdapter.notifyDataSetChanged();
+                                    filesListViewAdapter.notifyDataSetChanged();
                                     Folders.foldersPath.clear();
                                     Folders.foldersName.clear();
                                     progressDialog.dismiss();
@@ -439,10 +426,10 @@ public class SDCardFragment extends Fragment {
                         }
                         break;
                     case R.id.select_all:
-                        SDCardListViewAdapter.selectAll();
+                        FilesListViewAdapter.selectAll();
                         break;
                     case R.id.dismiss:
-                        SDCardListViewAdapter.dismiss();
+                        FilesListViewAdapter.dismiss();
                         break;
                 }
                 return true;
@@ -451,7 +438,7 @@ public class SDCardFragment extends Fragment {
             @Override
             public void onDestroyActionMode(ActionMode mode) {
                 isActionMode = false;
-                SDCardListViewAdapter.checkStates.clear();
+                FilesListViewAdapter.checkStates.clear();
                 for (Folders folder: foldersList)
                     folder.setSelected(false);
                 recyclerViewAdapter.notifyDataSetChanged();
@@ -505,12 +492,12 @@ public class SDCardFragment extends Fragment {
                     File file = new File(currentFolder + File.separator + folderName);
                     if (file.mkdir()){
                         long size = Folders.getFolderSize(file);
-                        sdCardListViewAdapter.add(new Folders(R.drawable.ic_folders, file, size));
+                        filesListViewAdapter.add(new Folders(R.drawable.ic_folders, file, size));
                         Toast.makeText(getContext(), R.string.folder_created, Toast.LENGTH_LONG).show();
                         executorService.execute(()->{
                             sort = sharedPreferences.getString("card_sort", "a to z");
                             Folders.SDCardSort(sort, isReverse, foldersList);
-                            handler.post(()-> sdCardListViewAdapter.notifyDataSetChanged());
+                            handler.post(()-> filesListViewAdapter.notifyDataSetChanged());
                         });
                     }
                 }).setNegativeButton(R.string.cancel_alert_dialog, (dialogInterface, i) -> dialogInterface.dismiss());
@@ -559,7 +546,7 @@ public class SDCardFragment extends Fragment {
                     if (sort != null) {
                         Folders.SDCardSort(sort, isReverse, foldersList);
                     }
-                    handler.post(()-> sdCardListViewAdapter.notifyDataSetChanged());
+                    handler.post(()-> filesListViewAdapter.notifyDataSetChanged());
                 });
                 break;
             case R.id.settings:
